@@ -1,0 +1,79 @@
+# ~/.config/zsh/zsh_env
+# ------------------------------------------------------------
+# 🌍 Locale & 基础设置
+export LANG="en_US.UTF-8"
+export EDITOR="nvim"
+if [[ "$TERM" == "xterm-kitty" ]]; then
+  export TERMINFO_DIRS="$HOME/.config/kitty/terminfo:/usr/share/terminfo"
+else
+  export TERMINFO="/usr/share/terminfo"
+fi
+
+# 🎨 彩色输出
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export EZA_CONFIG_HOME="$HOME/.config"
+
+# ZimFW
+export ZDOTDIR="$HOME/.config"
+export ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
+export ZIM_CONFIG_FILE=${ZIM_HOME:-${HOME}}/.zimrc
+
+# 🛠 Homebrew
+export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
+export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_NO_INSTALL_CLEANUP=1
+
+# 📦 Node.js / pnpm
+export NVM_NODEJS_ORG_MIRROR="https://npmmirror.com/mirrors/node/"
+export NVM_IOJS_ORG_MIRROR="https://npmmirror.com/mirrors/iojs/"
+export NVM_DIR="$HOME/.nvm"
+export PNPM_HOME="$HOME/Library/pnpm"
+
+# 💎 Ruby
+export PATH="$PATH:$HOME/.rvm/bin"
+
+# 🐦 Flutter / Dart
+#export PUB_HOSTED_URL="https://pub.flutter-io.cn"
+#export FLUTTER_STORAGE_BASE_URL="https://storage.flutter-io.cn"
+
+# 🐍 Python / pyenv
+export PYENV_ROOT="$(brew --prefix pyenv)"
+# 🔒 Python 安全
+export PIP_REQUIRE_VIRTUALENV=true
+#export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+# 🐹 Go
+export GOPATH="$HOME/go"
+export GOBIN="$GOPATH/bin"
+
+# 🦀 Rust
+export CARGO_HOME="$HOME/.cargo"
+export RUSTUP_HOME="$HOME/.rustup"
+
+# ☕ Java（macOS 自动检测 JDK 17）
+export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+
+# ⏱ 历史记录配置
+export HISTFILE="$HOME/.zsh_history"
+export HISTSIZE=10000
+export SAVEHIST=10000
+export HISTCONTROL=ignoredups:erasedups
+export HISTIGNORE="ls:cd:pwd:exit:date:* --help"
+export HISTTIMEFORMAT="[%F %T] "
+
+# 📂 zoxide 数据路径
+export _ZO_DATA_DIR="$HOME/.local/share/zoxide"
+
+# 🌐 Proxy（手动 alias 开关）
+#export HTTP_PROXY="http://127.0.0.1:7890"
+#export HTTPS_PROXY="http://127.0.0.1:7890"
+
+# 🔍 fzf 配置
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border -i"
+export FZF_CTRL_T_COMMAND="fd --type f --hidden --follow --exclude .git"
+export FZF_CTRL_R_OPTS="--sort --exact"
+export FZF_ALT_C_COMMAND="fd --type d --hidden --follow --exclude .git"
+
