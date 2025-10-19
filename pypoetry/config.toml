@@ -1,0 +1,39 @@
+[virtualenvs]
+# ✅ 推荐：将虚拟环境放在项目目录中
+in-project = true
+
+# ✅ 禁止自动激活虚拟环境（你可以手动用 `source .venv/bin/activate` 或 poetry run）
+prompt = "off"
+
+# ✅ 默认虚拟环境创建路径（若 in-project = false 生效）
+path = "{cache-dir}/virtualenvs"
+
+# ✅ 允许使用 Python 的 patch 版本（如 3.11.8 → 3.11.9）
+prefer-active-python = true
+
+
+[repositories."pypi"]
+url = "https://pypi.org/simple"
+
+
+# ✅ 国内镜像（可选）：适用于中国大陆用户
+[repositories."tsinghua"]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+
+#[http-basic."tsinghua"]
+#username = ""
+#password = ""
+
+[experimental]
+# ✅ 使用新版 installer（加速、稳定）
+new-installer = true
+
+[installer]
+# ✅ 开启缓存（加速重复安装）
+no-binary = false
+max-workers = 4
+
+[cache]
+# ✅ 控制缓存位置（默认即可）
+dir = "{cache-dir}"
+
