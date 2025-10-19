@@ -1,0 +1,192 @@
+# starship.toml - Starship Prompt Configuration
+# ------------------------------------------------------------
+# 此文件用于自定义 Starship 提示符的外观和行为。"$schema" = 'https://starship.rs/config-schema.json'
+
+# $username\   ☕️ 󱗞 
+
+format = """\
+($directory)\
+$os\
+$git_branch\
+$git_status\
+ 🍀\
+$fill\
+$cmd_duration\
+$c\
+$bun\
+$nodejs\
+$rust\
+$golang\
+$php\
+$java\
+$kotlin\
+$python\
+$conda\
+$docker_context\
+$zig\
+$time\
+$battery\
+$line_break$character\
+"""
+
+add_newline = true
+command_timeout = 3600000
+palette = "catppuccin_mocha"
+
+[palettes.catppuccin_mocha]
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe"
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"
+
+[line_break]
+disabled = false
+
+[fill]
+symbol = ' '
+
+[character]
+disabled = false
+success_symbol = "[󱗞 ](fg:green)"
+error_symbol = "[󱗞 ](fg:red)"
+vimcmd_symbol = "[ ](bold red)"
+vimcmd_replace_one_symbol = "[R](bold peach)"
+vimcmd_visual_symbol = "[V](bold mauve)"
+
+[username]
+disabled = false
+show_always = false
+style_user = 'bold blue'
+style_root = 'bold red'
+format = '[󱗞 $user](fg:$style) '
+
+[directory]
+format = "[$path](bold $style)[$read_only]($read_only_style) "
+truncation_length = 5
+style = "fg:blue"
+read_only_style = "fg:blue"
+before_repo_root_style = "fg:blue"
+truncation_symbol = "…/"
+truncate_to_repo = true
+read_only = "  "
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = "󰝚 "
+"Pictures" = " "
+"Developer" = "󰲋 "
+
+[cmd_duration]
+format = " [t.$duration]($style) "
+style = "fg:surface1"
+min_time = 500
+
+[git_branch]
+symbol = ""
+format = " 🌱  [$symbol $branch]($style) "
+style = "bold fg:mauve"
+
+[git_status]
+format = '[($all_status$ahead_behind )]($style)'
+style = "fg:text"
+
+[python]
+disabled = false
+symbol = ""
+format = "[ $symbol$pyenv_prefix($version)( $virtualenv)](fg:peach)"
+version_format = "$raw"
+
+[java]
+disabled = false
+symbol = ""
+format = '[[ $symbol ($version) ](fg:red)]($style)'
+version_format = "$raw"
+
+[kotlin]
+symbol = ""
+style = "bg:color_blue"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+
+[c]
+disabled = false
+symbol = " "
+format = '[[ $symbol ($version) ](fg:blue)]($style)'
+version_format = "$raw"
+
+[zig]
+disabled = false
+format = '[[ $symbol ($version) ](fg:peach)]($style)'
+version_format = "$raw"
+
+[bun]
+disabled = false
+version_format = "$raw"
+format = '[[ $symbol ($version) ](fg:text)]($style)'
+
+[nodejs]
+symbol = ""
+format = '[[ $symbol ($version) ](fg:green)]($style)'
+
+[rust]
+symbol = ""
+format = '[[ $symbol ($version) ](fg:red)]($style)'
+
+[golang]
+symbol = ""
+format = '[[ $symbol ($version) ](fg:teal)]($style)'
+
+[php]
+symbol = ""
+format = '[[ $symbol ($version) ](fg:peach)]($style)'
+
+[conda]
+style = "bg:color_bg3"
+format = '[[ $symbol( $environment) ](fg:#83a598 bg:color_bg3)]($style)'
+
+[docker_context]
+disabled = true
+
+[time]
+disabled = false
+time_format = "%R"
+format = '[[    $time ](fg:subtext0)]($style)'
+
+[battery]
+disabled = false
+full_symbol = "󰁹 "
+charging_symbol = "󰂄 "
+discharging_symbol = "󰂃 "
+unknown_symbol = "󰁽 "
+empty_symbol = "󰂎 "
+# display = [
+#   {
+#     threshold = 10
+#     style = "red bold"
+#     charging_symbol = null
+#     discharging_symbol = null
+#   }
+# ]
+format = "[$symbol$percentage]($style) "

@@ -1,0 +1,70 @@
+# Dirs
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+
+# kitty +kitten 实用工具
+alias kssh="kitten ssh"
+alias kdiff="kitten diff" # diff files or fold
+alias icat="kitten icat" # preview image
+
+
+# Eza (ls)
+# eza --color-scale=all --color=auto
+alias ls="ls --color=auto"
+alias l="eza --long --git -a"
+alias lt="eza --tree --level=3 --long --git"
+alias ltree="eza --tree --level=3  --git"
+
+alias cls=clear
+alias cat=bat
+
+alias zshrc="nvim ~/.config/zsh/zshrc"
+alias zshenv="nvim ~/.config/zsh/zsh_env"
+alias zshalias="nvim ~/.config/zsh/zsh_alias"
+alias zshconfig="nvim ~/.zshrc"
+alias zimrc="nvim ~/.config/.zim/.zimrc"
+alias ohmyzsh="cd ~/.oh-my-zsh"
+
+alias loaddb="gupdatedb --localpaths=$HOME --prunepaths=/Volumes --output=$HOME/locatedb"
+alias pn=pnpm
+
+alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+alias v="nvim"
+alias vi="nvim"
+alias vim="$HOME/.local/bin/lvim"
+alias ccc=claude
+
+# VI Mode!!!
+# bindkey jj vi-cmd-mode
+
+# python
+alias pywhich='echo "$(pyenv version-name): $(pyenv which python)"'
+alias venv-activate='source $(poetry env info --path)/bin/activate'
+alias pyenv-activate='poetry env use $(pyenv which python)'
+
+# Docker
+# alias dco="docker compose"
+# alias dps="docker ps"
+# alias dpa="docker ps -a"
+# alias dl="docker ps -l -q"
+# alias dx="docker exec -it"
+
+function ranger {
+	local IFS=$'\t\n'
+	local tempfile="$(mktemp -t tmp.XXXXXX)"
+	local ranger_cmd=(
+		command
+		ranger
+		--cmd="map Q chain shell echo %d > "$tempfile"; quitall"
+	)
+
+	${ranger_cmd[@]} "$@"
+	if [[ -f "$tempfile" ]] && [[ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]]; then
+		cd -- "$(cat "$tempfile")" || return
+	fi
+	command rm -f -- "$tempfile" 2>/dev/null
+}
+alias rr='ranger'
