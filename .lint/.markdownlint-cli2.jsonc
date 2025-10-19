@@ -1,0 +1,5 @@
+{
+  "config": {
+    "extends": "~/.config/.lint/markdown-rules.jsonc"
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": [
+    "oh-my-opencode",
+    "opencode-antigravity-auth@latest"
+  ],
+  "provider": {
+    "google": {
+      "name": "Google",
+      "models": {
+        "antigravity-gemini-3-pro-high": {
+          "name": "Gemini 3 Pro High (Antigravity)",
+          "thinking": true,
+          "attachment": true,
+          "limit": {
+            "context": 1048576,
+            "output": 65535
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "antigravity-gemini-3-pro-low": {
+          "name": "Gemini 3 Pro Low (Antigravity)",
+          "thinking": true,
+          "attachment": true,
+          "limit": {
+            "context": 1048576,
+            "output": 65535
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "antigravity-gemini-3-flash": {
+          "name": "Gemini 3 Flash (Antigravity)",
+          "attachment": true,
+          "limit": {
+            "context": 1048576,
+            "output": 65536
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image",
+              "pdf"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        }
+      }
+    },
+    "alibaba-cn": {
+      "id": "alibaba-cn",
+      "env": [
+        "DASHSCOPE_API_KEY"
+      ],
+      "npm": "@ai-sdk/openai-compatible",
+      "api": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "name": "Alibaba (China)",
+      "models": {
+        "qwen-coder-plus": {
+          "id": "qwen-coder-plus",
+          "name": "QWen3 Code",
+          "family": "qwen",
+          "attachment": false,
+          "tool_call": true,
+          "temperature": true,
+          "reasoning": true,
+          "release_date": "2025-12-22",
+          "last_updated": "2025-12-22",
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "cost": {
+            "input": 0.6,
+            "output": 1.2
+          },
+          "limit": {
+            "context": 131072,
+            "output": 131072
+          }
+        },
+        "qwen-max": {
+          "id": "qwen-max",
+          "name": "QWen Max",
+          "family": "qwen",
+          "attachment": false,
+          "tool_call": true,
+          "temperature": true,
+          "reasoning": true,
+          "release_date": "2025-12-22",
+          "last_updated": "2025-12-22",
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "cost": {
+            "input": 0.8,
+            "output": 2.5
+          },
+          "limit": {
+            "context": 32768,
+            "output": 8192
+          }
+        },
+        "MiniMax-M2.1": {
+          "id": "MiniMax-M2.1",
+          "name": "MiniMax-M2.1",
+          "family": "minimax",
+          "attachment": false,
+          "reasoning": true,
+          "tool_call": true,
+          "temperature": true,
+          "release_date": "2025-12-23",
+          "last_updated": "2025-12-23",
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "open_weights": true,
+          "cost": {
+            "input": 0.3,
+            "output": 1.2
+          },
+          "limit": {
+            "context": 204800,
+            "output": 131072
+          }
+        },
+        "glm-4.7": {
+          "id": "glm-4.7",
+          "name": "GLM-4.7",
+          "family": "glm",
+          "attachment": false,
+          "reasoning": true,
+          "tool_call": true,
+          "interleaved": {
+            "field": "reasoning_content"
+          },
+          "temperature": true,
+          "knowledge": "2025-04",
+          "release_date": "2025-12-22",
+          "last_updated": "2025-12-22",
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "open_weights": true,
+          "cost": {
+            "input": 0.6,
+            "output": 2.2,
+            "cache_read": 0.11,
+            "cache_write": 0
+          },
+          "limit": {
+            "context": 204800,
+            "output": 131072
+          }
+        },
+        "glm-4-flash": {
+          "id": "glm-4-flash",
+          "name": "GLM-4 Flash",
+          "family": "glm",
+          "attachment": false,
+          "reasoning": false,
+          "tool_call": true,
+          "temperature": true,
+          "knowledge": "2025-04",
+          "release_date": "2025-12-22",
+          "last_updated": "2025-12-22",
+          "modalities": {
+            "input": [
+              "text"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "cost": {
+            "input": 0.1,
+            "output": 0.1
+          },
+          "limit": {
+            "context": 128000,
+            "output": 8192
+          }
+        }
+      }
+    }
+  }
+}
