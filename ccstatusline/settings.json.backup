@@ -1,0 +1,135 @@
+{
+  "version": 3,
+  "lines": [
+    [
+      {
+        "id": "1",
+        "type": "model",
+        "color": "cyan"
+      },
+      {
+        "id": "2",
+        "type": "separator"
+      },
+      {
+        "id": "3",
+        "type": "context-percentage",
+        "color": "brightBlue"
+      },
+      {
+        "id": "4",
+        "type": "separator"
+      },
+      {
+        "id": "5",
+        "type": "tokens-total",
+        "color": "magenta"
+      },
+      {
+        "id": "6",
+        "type": "separator"
+      },
+      {
+        "id": "a1134436-5a11-4503-af99-80decdfc697f",
+        "type": "tokens-cached",
+        "color": "brightBlack"
+      }
+    ],
+    [
+      {
+        "id": "14",
+        "type": "git-branch",
+        "color": "magenta"
+      },
+      {
+        "id": "15",
+        "type": "separator"
+      },
+      {
+        "id": "16",
+        "type": "git-changes",
+        "color": "yellow"
+      },
+      {
+        "id": "19",
+        "type": "separator"
+      },
+      {
+        "id": "18",
+        "type": "git-worktree",
+        "color": "cyan"
+      },
+      {
+        "id": "17",
+        "type": "separator"
+      }
+    ],
+    [
+      {
+        "id": "23",
+        "type": "output-style",
+        "color": "brightBlack"
+      },
+      {
+        "id": "22",
+        "type": "separator"
+      },
+      {
+        "id": "21",
+        "type": "session-cost",
+        "color": "green"
+      },
+      {
+        "id": "24",
+        "type": "separator"
+      },
+      {
+        "id": "25",
+        "type": "tokens-input",
+        "color": "cyan"
+      },
+      {
+        "id": "26",
+        "type": "separator"
+      },
+      {
+        "id": "27",
+        "type": "tokens-output",
+        "color": "brightBlack"
+      }
+    ],
+    [
+      {
+        "id": "09798b42-f903-43e4-846b-5c3c5ee219bb",
+        "type": "current-working-dir",
+        "color": "blue",
+        "rawValue": true,
+        "metadata": {
+          "fishStyle": "true"
+        }
+      }
+    ]
+  ],
+  "flexMode": "full-until-compact",
+  "compactThreshold": 60,
+  "colorLevel": 2,
+  "defaultPadding": "",
+  "inheritSeparatorColors": true,
+  "globalBold": false,
+  "powerline": {
+    "enabled": true,
+    "separators": [
+      ""
+    ],
+    "separatorInvertBackground": [
+      false
+    ],
+    "startCaps": [
+      ""
+    ],
+    "endCaps": [
+      ""
+    ],
+    "autoAlign": true
+  }
+}

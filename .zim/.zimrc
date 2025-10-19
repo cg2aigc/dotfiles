@@ -1,0 +1,30 @@
+# .zimrc - Zimfw Modules (Plugins)
+
+# ------------------------------------------------------------
+# 基础模块
+zmodule environment
+zmodule input # Applies correct bindkeys for input events
+zmodule utility #	Adds utility aliases and functions. Adds colour to ls, grep and less
+
+# 实用工具插件
+zmodule archive # Provides archive and unarchive functions for easy archive manipulation
+zmodule exa # aliases for eza or exa.to ls/ll/l/lx/lt/lc
+zmodule git # Provides nice git aliases and functions
+zmodule termtitle #	Sets a custom terminal title
+zmodule fzf # Quickly find
+zmodule joke/zim-mise # a development environment setup tool
+zmodule kiesman99/zim-zoxide # 目录跳转
+
+# 提示符／主题
+zmodule joke/zim-starship # Prompt Style
+# zmodule magicmace
+# zmodule bira
+
+# 补全系统
+zmodule zsh-users/zsh-completions --fpath src
+zmodule completion
+
+zmodule zsh-users/zsh-syntax-highlighting
+zmodule zsh-users/zsh-autosuggestions
+
+

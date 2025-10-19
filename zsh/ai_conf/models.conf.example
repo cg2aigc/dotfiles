@@ -1,0 +1,23 @@
+# Claude Code 模型配置文件
+# 格式：模型名称|API_BASE_URL|API_KEY_ENV_VAR|MODEL_NAME|描述
+
+# 默认 Claude 官方订阅
+Claude Official|https://api.anthropic.com|ANTHROPIC_API_KEY|claude-sonnet-4-5|Claude 官方订阅（默认）
+
+# 智谱 AI (GLM)
+# 需要 LiteLLM Gateway 或兼容网关
+Zhipu GLM|YOUR_LITELLM_URL|ZHIPU_API_KEY|glm-4|智谱 AI GLM-4
+
+# Kimi AI (Moonshot)
+Kimi AI|YOUR_LITELLM_URL|MOONSHOT_API_KEY|moonshot-v1|Kimi AI (Moonshot)
+
+# Minimax
+Minimax|YOUR_LITELLM_URL|MINIMAX_API_KEY|minimax|Minimax
+
+# DeepSeek
+DeepSeek|YOUR_LITELLM_URL|DEEPSEEK_API_KEY|deepseek-chat|DeepSeek
+
+# 注意：
+# 1. YOUR_LITELLM_URL 需要替换为你的 LiteLLM 网关地址
+# 2. API Key 需要在环境变量中设置（如 ~/.zshrc 或 ~/.bashrc）
+# 3. 如果使用统一网关，可以设置相同的 BASE_URL

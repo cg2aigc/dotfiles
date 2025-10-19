@@ -1,0 +1,54 @@
+#!/bin/bash
+# Claude Code 第三方模型 API Key 配置示例
+#
+# 使用方法：
+# 1. 复制此文件为 ~/.config/.zshrc 或 ~/.zshrc
+# 2. 填入你的实际 API Key
+# 3. 重新加载 shell: source ~/.zshrc
+
+# ============================================
+# Claude 官方 API Key（默认）
+# ============================================
+export ANTHROPIC_API_KEY="sk-ant-api03-xxxxx"
+
+# ============================================
+# 智谱 AI (GLM)
+# https://open.bigmodel.cn/
+# ============================================
+export ZHIPU_API_KEY="your-zhipu-api-key-here"
+
+# ============================================
+# Kimi AI (Moonshot)
+# https://platform.moonshot.cn/
+# ============================================
+export MOONSHOT_API_KEY="your-moonshot-api-key-here"
+
+# ============================================
+# Minimax
+# https://api.minimax.chat/
+# ============================================
+export MINIMAX_API_KEY="your-minimax-api-key-here"
+
+# ============================================
+# DeepSeek
+# https://platform.deepseek.com/
+# ============================================
+export DEEPSEEK_API_KEY="your-deepseek-api-key-here"
+
+# ============================================
+# LiteLLM Gateway URL（如果使用统一网关）
+# ============================================
+# export LITELLM_URL="http://localhost:4000"
+
+# ============================================
+# 说明
+# ============================================
+#
+# 如果你使用 LiteLLM 作为统一网关：
+# 1. 安装 LiteLLM: pip install litellm
+# 2. 启动服务: litellm --port 4000
+# 3. 修改 ~/.config/zsh/ai_conf/models.conf 中的 YOUR_LITELLM_URL
+#    为实际的 LiteLLM URL (如 http://localhost:4000)
+#
+# LiteLLM 配置示例：
+# https://docs.litellm.ai/docs/

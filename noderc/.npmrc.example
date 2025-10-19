@@ -1,0 +1,16 @@
+registry=https://registry.npmmirror.com
+@scope:registry=http://npm.your.domain
+store-dir=/Your/Home/.pnpm-store
+cache-dir=/Your/Home/.pnpm-cache
+state-dir=/Your/Home/.pnpm-state
+shamefully-hoist=true
+strict-peer-dependencies=false
+auto-install-peers=true
+network-concurrency=16
+child-concurrency=5
+
+; # Internal npm registry auth
+//npm.your.domain/:_authToken=xxxxxxxxxxxxxx
+//npm.your.domain/:username=your_id
+//npm.your.domain/:_password=your_password
+//npm.your.domain/:email=your_email@your.domain

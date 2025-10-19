@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "@babel/eslint-parser": "^7.19.1",
+    "@nestjs/cli": "^7.5.3",
+    "@vue/cli": "^5.0.8",
+    "@vue/cli-init": "^5.0.8",
+    "lerna": "^5.1.8",
+    "pm2": "^5.1.2",
+    "tslib": "^2.4.1",
+    "vue-language-server": "^0.0.67"
+  }
+}

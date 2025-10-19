@@ -1,0 +1,187 @@
+# ~/.config/zshrc - Reconstructed with Zimfw + Starship
+
+# 防止按下 Ctrl+d 时意外退出终端
+set -o ignore_eof
+
+# --- Environment --------------------------------------------------------
+# 引入环境变量(检查.zshenv 没有source zsh_env时取消下面注释)
+# [ -f "$HOME/.config/zsh/zsh_env" ] && source "$HOME/.config/zsh/zsh_env"
+
+# --- Zimfw -------------------------------------------------------
+# --- Zimfw Framework Setup ---
+# Load Zim Framework if not already loaded.
+if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+  # Download zimfw plugin manager if missing.
+  curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+    https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+fi
+
+# --- Zimfw Initialization ---
+# This must be the last line of the file.
+#zimfw init -q
+# Install missing modules and update ${ZIM_HOME}/init.zsh if missing or outdated.
+# if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE:-${ZDOTDIR:-${HOME}}/.zimrc} ]]; then
+#   source ${ZIM_HOME}/zimfw.zsh init -q
+# else
+#   source ${ZIM_HOME}/init.zsh
+# fi
+if [ -f "${ZIM_HOME}/init.zsh" ]; then
+  source "${ZIM_HOME}/init.zsh"
+else
+  source ${ZIM_HOME}/zimfw.zsh init -q
+fi
+
+# --- Zimfw Module Management ---
+# Add your modules/plugins in ~/.zimrc. Zimfw will handle loading, updating, and management.
+
+# ------------------------------------------------------------
+# 补全(已交由.zimrc托管)
+# autoload -Uz compinit
+# compinit
+
+# case-insensitive 补全
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+# Docker 补全
+fpath=($HOME/.docker/completions $fpath)
+
+# ------------------------------------------------------------
+# Node.js / nvm
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+
+# Node.js / fnm
+eval "$(fnm env --use-on-cd --shell zsh)"
+# ------------------------------------------------------------
+# PATH 处理函数
+prepend_path () {
+  case ":$PATH:" in
+    *":$1:"*) ;; # already exists
+    *) PATH="$1:$PATH" ;;
+  esac
+}
+
+# ------------------------------------------------------------
+# PATH 优化
+# Keep this as Zimfw doesn't manage these custom paths
+prepend_path "$NVM_DIR/versions/node/$(nvm version)/bin"
+prepend_path "$(npm prefix -g)/bin"
+prepend_path "$PNPM_HOME"
+prepend_path "$HOME/.pnpm-global/bin"
+prepend_path "$HOME/MySDK/flutter/bin"
+prepend_path "$HOME/.pub-cache/bin"
+prepend_path "$HOME/.local/bin"
+#prepend_path "$MONO_HOME/bin"
+prepend_path "$HOME/.codeium/windsurf/bin"
+prepend_path "/usr/local/opt/sqlite/bin"
+prepend_path "/usr/local/opt/openssl/bin"
+prepend_path "/usr/local/opt/icu4c/bin"
+prepend_path "/usr/local/opt/icu4c/lib"
+prepend_path "/usr/local/bin/fzy"
+prepend_path "/usr/local/go/bin"
+prepend_path "/usr/local/sbin"
+prepend_path "$HOME/.rvm/bin"
+prepend_path "$PYENV_ROOT/bin"
+prepend_path "$PYENV_ROOT/shims"
+prepend_path "$GOBIN"
+
+#prepend_path "/usr/local/opt/icu4c/sbin"
+#prepend_path "/usr/local/opt/coreutils/libexec/gnubin"
+
+# ------------------------------------------------------------
+##### OHMYZSH 基础配置 #####
+#export ZSH="$HOME/.oh-my-zsh"
+#ZSH_THEME="cg"
+#plugins=(catimg cargo git macos sudo autojump web-search extract tmux zsh-autosuggestions zsh-syntax-highlighting)
+#[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+#source $ZSH/oh-my-zsh.sh
+
+# ------------------------------------------------------------
+# 插件 & Prompt
+# Starship
+# eval "$(starship init zsh)"
+# function set_win_title(){
+#     echo -ne "\033]0; $(basename "$PWD") \007"
+# }
+# starship_precmd_user_func="set_win_title"
+
+# Mise is a development environment setup tool.
+# eval "$(mise activate zsh)"
+# Zoxide is a smarter cd command, inspired by z and autojump.
+# eval "$(zoxide init zsh)"
+
+# Zellijis a workspace aimed at developers, ops-oriented people and anyone who loves the terminal. Similar programs are sometimes called "Terminal Multiplexers".
+# eval "$(zellij setup --generate-auto-start zsh)"
+
+# fzf
+# Now managed by `zmodule fzf`
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Set up fzf key bindings and fuzzy completion
+# source <(fzf --zsh)
+
+# zoxide
+# Now managed by `zmodule zoxide`
+# if command -v zoxide >/dev/null 2>&1; then
+#   eval "$(zoxide init zsh)"
+# fi
+
+# locate 设置（带缓存）
+if which glocate > /dev/null; then
+  alias locate="glocate -d $HOME/locatedb"
+  [[ -f "$HOME/locatedb" ]] && export LOCATE_PATH="$HOME/locatedb"
+fi
+
+# ------------------------------------------------------------
+# pyenv 初始化
+# Now managed by `zmodule pyenv-init`
+# # 由于 conda 会注入自身路径，强制将 pyenv shim 放在 PATH 最前
+if command -v pyenv >/dev/null 2>&1; then
+  eval "$(pyenv init --path)"
+  eval "$(pyenv init - zsh)"
+  if command -v pyenv-virtualenv-init >/dev/null 2>&1; then
+    eval "$(pyenv virtualenv-init -)"
+  fi
+fi
+
+# ------------------------------------------------------------
+# Conda 初始化（保持注释 — 按需取消注释启用）
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$('$HOME/miniconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "$HOME/miniconda/etc/profile.d/conda.sh" ]; then
+#         . "$HOME/miniconda/etc/profile.d/conda.sh"
+#     else
+#         export PATH="$HOME/miniconda/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+# <<< conda initialize <<<
+
+# ------------------------------------------------------------
+# 其他服务（需要时启用）
+
+
+# ------------------------------------------------------------
+# 常用别名
+source ~/.config/zsh/zsh_alias
+
+# --- Key Bindings -------------------------------------------------------
+# 将命令行编辑模式设置为 Vi 模式
+bindkey -v
+bindkey jj vi-cmd-mode # 按 jj 来代替 Esc 键切换回命令模式
+#bindkey '^u' autosuggest-toggle # 切换建议： 启用或禁用自动建议功能。
+bindkey '^L' vi-forward-word # 向前跳词： 将光标向前（右）移动一个单词的距离。这是一个 Vi/Vim 模式下的编辑操作，对于快速在命令行上导航很有用
+bindkey '^k' up-line-or-search # 向上搜索历史：在命令行上向上移动一行历史记录，或者在输入部分内容时，向上搜索匹配该内容的历史记录
+bindkey '^j' down-line-or-search # 向下搜索历史： 在命令行上向下移动一行历史记录，或者向下搜索匹配当前输入内容的下一条历史记录
+bindkey '^e' autosuggest-execute # 执行建议： 接受自动建议中的内容，并立即执行该命令，通常用于重复执行前一个命令。
+bindkey '^w' autosuggest-accept # 接受建议： 将自动建议中的内容插入到当前命令行（接受建议），但不立即执行命令。
+
+# --- AI --------------------------------------------------------
+# AI API KEYs
+source "$HOME/.config/zsh/ai_conf/api-keys"
+
+# --- Others --------------------------------------------------------
+
