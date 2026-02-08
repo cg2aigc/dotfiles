@@ -1,0 +1,273 @@
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-opencode/master/assets/oh-my-opencode.schema.json",
+  "google_auth": false,
+
+  // ============================================
+  // AGENT CONFIGURATION - Antigravity Priority
+  // ============================================
+  "agents": {
+    // Sisyphus - Main orchestrator with high reasoning capability
+    "sisyphus": {
+      "model": "google/antigravity-claude-opus-4-5-thinking",
+      "variant": "max",
+      "temperature": 0.4,
+      "description": "Primary orchestrator - coordinates specialized agents"
+    },
+
+    // Build - Default execution agent for coding tasks
+    "build": {
+      "model": "google/antigravity-claude-sonnet-4-5-thinking",
+      "variant": "max",
+      "temperature": 0.3,
+      "description": "Default coding agent - optimized for implementation"
+    },
+
+    // Plan - Strategic planning agent
+    "plan": {
+      "model": "google/antigravity-claude-opus-4-5-thinking",
+      "variant": "max",
+      "temperature": 0.5,
+      "description": "Strategic planner - creates detailed work plans"
+    },
+
+    // Sisyphus-Junior - Focused executor (cannot re-delegate)
+    "sisyphus-junior": {
+      "model": "google/antigravity-claude-sonnet-4-5-thinking",
+      "variant": "max",
+      "temperature": 0.4,
+      "description": "Focused executor - executes delegated tasks without re-delegation"
+    },
+
+    // OpenCode-Builder - Alternative builder (disabled by default)
+    "OpenCode-Builder": {
+      "model": "google/antigravity-claude-sonnet-4-5-thinking",
+      "variant": "max",
+      "temperature": 0.3,
+      "disable": true,
+      "description": "OpenCode's default build agent (disabled when Sisyphus is active)"
+    },
+
+    // Prometheus - The Planner (READ-ONLY, markdown only)
+    "prometheus": {
+      "model": "google/antigravity-claude-opus-4-5-thinking",
+      "variant": "max",
+      "temperature": 0.3,
+      "description": "Pure strategist - interviews, analyzes, creates plans (READ-ONLY)"
+    },
+
+    // Metis - Plan Consultant (pre-planning analysis)
+    "metis": {
+      "model": "google/antigravity-claude-opus-4-5-thinking",
+      "variant": "max",
+      "temperature": 0.5,
+      "description": "Pre-planning consultant - identifies hidden requirements and ambiguities"
+    },
+
+    // Momus - Plan Reviewer (high-precision validation)
+    "momus": {
+      "model": "google/antigravity-claude-opus-4-5-thinking",
+      "variant": "max",
+      "temperature": 0.2,
+      "description": "Plan reviewer - validates plans for clarity and completeness"
+    },
+
+    // Oracle - Design & debugging expert
+    "oracle": {
+      "model": "google/antigravity-claude-opus-4-5-thinking",
+      "variant": "max",
+      "temperature": 0.4,
+      "description": "Design and debugging expert - architecture consultation"
+    },
+
+    // Librarian - Research & documentation expert (use Sonnet for cost efficiency)
+    "librarian": {
+      "model": "google/antigravity-claude-sonnet-4-5",
+      "temperature": 0.3,
+      "description": "Research specialist - official docs, open source implementations"
+    },
+
+    // Explore - Fast codebase exploration (contextual grep)
+    "explore": {
+      "model": "google/antigravity-gemini-3-flash",
+      "variant": "low",
+      "temperature": 0.1,
+      "description": "Fast explorer - blazing quick codebase search"
+    },
+
+    // Multimodal-Looker - Media analysis (PDFs, images, diagrams)
+    "multimodal-looker": {
+      "model": "google/antigravity-gemini-3-flash",
+      "variant": "low",
+      "temperature": 0.3,
+      "description": "Media analyst - extracts insights from PDFs, images, diagrams"
+    },
+
+    // Atlas - Plan executor (orchestrates specialized agents)
+    "atlas": {
+      "model": "google/antigravity-claude-opus-4-5-thinking",
+      "variant": "max",
+      "temperature": 0.5,
+      "description": "Plan executor - executes Prometheus plans via delegation"
+    }
+  },
+
+  // ============================================
+  // CATEGORIES - Delegate Task Presets
+  // ============================================
+  "categories": {
+    // Visual Engineering - Frontend, UI/UX, design, styling
+    "visual-engineering": {
+      "model": "google/antigravity-gemini-3-pro",
+      "variant": "high",
+      "temperature": 0.6,
+      "description": "Frontend, UI/UX, design, styling, animation",
+      "prompt_append": "Focus on creating visually stunning, accessible, and responsive interfaces. Consider user experience, color harmony, and smooth animations."
+    },
+
+    // Ultrabrain - Deep logical reasoning for complex problems
+    "ultrabrain": {
+      "model": "google/antigravity-claude-opus-4-5-thinking",
+      "variant": "max",
+      "temperature": 0.5,
+      "description": "Deep logical reasoning, complex architecture decisions",
+      "prompt_append": "Think deeply and systematically. Break down complex problems into components. Consider edge cases, performance implications, and long-term maintainability."
+    },
+
+    // Artistry - Creative and unconventional approaches
+    "artistry": {
+      "model": "google/antigravity-claude-opus-4-5-thinking",
+      "variant": "max",
+      "temperature": 0.9,
+      "description": "Highly creative/artistic tasks, novel ideas",
+      "prompt_append": "Think outside the box. Explore unconventional solutions. Balance creativity with practicality."
+    },
+
+    // Quick - Trivial tasks (fast & cheap)
+    "quick": {
+      "model": "google/antigravity-gemini-3-flash",
+      "temperature": 0.2,
+      "description": "Trivial tasks - single file changes, typo fixes, simple modifications",
+      "prompt_append": "Be efficient and direct. Focus on completing the task quickly without over-engineering."
+    },
+
+    // Unspecified Low - General purpose, low effort
+    "unspecified-low": {
+      "model": "google/antigravity-gemini-3-flash",
+      "temperature": 0.4,
+      "description": "Tasks that don't fit other categories, low effort required",
+      "prompt_append": "Handle general-purpose tasks efficiently. Use good judgment and follow best practices."
+    },
+
+    // Unspecified High - General purpose, high effort
+    "unspecified-high": {
+      "model": "google/antigravity-claude-sonnet-4-5-thinking",
+      "variant": "max",
+      "temperature": 0.5,
+      "description": "Tasks that don't fit other categories, high effort required",
+      "prompt_append": "Thoroughly approach complex tasks. Invest time in analysis, planning, and quality implementation."
+    },
+
+    // Writing - Documentation and prose
+    "writing": {
+      "model": "google/antigravity-gemini-3-flash",
+      "temperature": 0.7,
+      "description": "Documentation, prose, technical writing",
+      "prompt_append": "Write clear, concise, and well-structured content. Consider your audience and maintain consistency."
+    },
+
+    // Deep - Goal-oriented autonomous problem solving
+    "deep": {
+      "model": "google/antigravity-claude-opus-4-5-thinking",
+      "variant": "max",
+      "temperature": 0.5,
+      "description": "Goal-oriented autonomous problem-solving. Thorough research before action.",
+      "prompt_append": "Invest time in thorough research before taking action. Think systematically and consider multiple approaches."
+    }
+  },
+
+  // ============================================
+  // SISYPHUS AGENT CONFIGURATION
+  // ============================================
+  "sisyphus_agent": {
+    "disabled": false,
+    "default_builder_enabled": false,
+    "planner_enabled": true,
+    "replace_plan": true
+  },
+
+  // ============================================
+  // PERFORMANCE TUNING
+  // ============================================
+  "background_task": {
+    "defaultConcurrency": 5,
+    "providerConcurrency": {
+      "google": 10,
+      "alibaba-cn": 8
+    },
+    "modelConcurrency": {
+      "google/antigravity-claude-opus-4-5-thinking": 3,
+      "google/antigravity-claude-sonnet-4-5-thinking": 5,
+      "google/antigravity-gemini-3-pro": 5,
+      "google/antigravity-gemini-3-flash": 15,
+      "alibaba-cn/glm-4.7": 3,
+      "alibaba-cn/qwen-coder-plus": 5,
+      "alibaba-cn/MiniMax-M2.1": 10
+    }
+  },
+
+  // ============================================
+  // EXPERIMENTAL FEATURES
+  // ============================================
+  "experimental": {
+    "dynamic_context_pruning": {
+      "enabled": true,
+      "notification": "detailed",
+      "turn_protection": {
+        "enabled": true,
+        "turns": 3
+      },
+      "protected_tools": [
+        "task",
+        "todowrite",
+        "lsp_rename",
+        "session_read",
+        "session_info",
+        "session_search"
+      ],
+      "strategies": {
+        "deduplication": {
+          "enabled": true
+        },
+        "supersede_writes": {
+          "enabled": true,
+          "aggressive": false
+        },
+        "purge_errors": {
+          "enabled": true,
+          "turns": 5
+        },
+        "remove_unchanged_files": {
+          "enabled": true
+        }
+      }
+    }
+  },
+
+  // ============================================
+  // GIT MASTER CONFIGURATION
+  // ============================================
+  "git_master": {
+    "commit_footer": true,
+    "include_co_authored_by": true
+  },
+
+  // ============================================
+  // HOOKS - Enable critical features
+  // ============================================
+  "disabled_hooks": [],
+
+  // ============================================
+  // AUTO UPDATE
+  // ============================================
+  "auto_update": true
+}

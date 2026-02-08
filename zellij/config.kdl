@@ -11,7 +11,7 @@ keybinds clear-defaults=true {
         bind "down" { MoveFocus "down"; }
         bind "up" { MoveFocus "up"; }
         bind "right" { MoveFocus "right"; }
-        bind "c" { SwitchToMode "renamepane"; PaneNameInput 0; }
+        bind "r" { SwitchToMode "renamepane"; PaneNameInput 0; }
         bind "d" { NewPane "down"; SwitchToMode "normal"; }
         bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "normal"; }
         bind "f" { ToggleFocusFullscreen; SwitchToMode "normal"; }
@@ -19,7 +19,7 @@ keybinds clear-defaults=true {
         bind "n" { NewPane; SwitchToMode "normal"; }
         bind "p" { SwitchFocus; }
         bind "Alt p" { SwitchToMode "normal"; }
-        bind "r" { NewPane "right"; SwitchToMode "normal"; }
+        // bind "r" { NewPane "right"; SwitchToMode "normal"; }
         bind "s" { NewPane "stacked"; SwitchToMode "normal"; }
         bind "w" { ToggleFloatingPanes; SwitchToMode "normal"; }
         bind "z" { TogglePaneFrames; SwitchToMode "normal"; }
@@ -123,7 +123,7 @@ keybinds clear-defaults=true {
             }
             SwitchToMode "normal"
         }
-        bind "Alt o" { SwitchToMode "normal"; }
+        bind "Alt O" { SwitchToMode "normal"; }
         bind "a" {
             LaunchOrFocusPlugin "zellij:about" {
                 floating true
@@ -132,6 +132,11 @@ keybinds clear-defaults=true {
             SwitchToMode "normal"
         }
     }
+
+    // shared_except - 排除模式
+    // 作用: 在所有指定模式中生效，排除列出的模式
+    // 语法: shared_except "模式1" "模式2" "模式3"
+    // 逻辑: (所有模式) - (排除的模式) = 生效的模式
     shared_except "locked" {
         bind "Alt h" { MoveFocusOrTab "left"; }
         bind "Alt j" { MoveFocus "down"; }
@@ -144,7 +149,6 @@ keybinds clear-defaults=true {
         bind "Alt down" { MoveFocus "down"; }
         bind "Alt up" { MoveFocus "up"; }
         bind "Alt right" { MoveFocusOrTab "right"; }
-        // bind "Alt +" { Resize "Increase"; }
         bind "Alt -" { Resize "Decrease"; }
         bind "Alt =" { Resize "Increase"; }
         bind "Alt [" { PreviousSwapLayout; }
@@ -152,7 +156,7 @@ keybinds clear-defaults=true {
         bind "Alt f" { ToggleFloatingPanes; }
         bind "Alt g" { SwitchToMode "locked"; }
         // 按键被占用，临时取消
-        // bind "Alt p" { TogglePaneInGroup; }
+        bind "Alt Ctrl p" { TogglePaneInGroup; }
         bind "Alt Shift p" { ToggleGroupMarking; }
         bind "Alt q" { Quit; }
     }
@@ -160,10 +164,10 @@ keybinds clear-defaults=true {
         bind "Alt m" { SwitchToMode "move"; }
     }
     shared_except "locked" "session" {
-        bind "Alt o" { SwitchToMode "session"; }
+        bind "Alt O" { SwitchToMode "session"; }
     }
     shared_except "locked" "scroll" "search" "tmux" {
-        bind "Ctrl b" { SwitchToMode "tmux"; }
+        bind "Alt b" { SwitchToMode "tmux"; }
     }
     shared_except "locked" "scroll" "search" {
         bind "Alt s" { SwitchToMode "scroll"; }
@@ -183,6 +187,11 @@ keybinds clear-defaults=true {
     shared_except "normal" "locked" "entersearch" "renametab" "renamepane" {
         bind "esc" { SwitchToMode "normal"; }
     }
+
+    // shared_among - 限定模式
+    // 作用: 仅在指定的模式中生效
+    // 语法: shared_among "模式1" "模式2" "模式3"
+    // 逻辑: 仅在列出的模式中生效，其他模式不生效
     shared_among "pane" "tmux" {
         bind "x" { CloseFocus; SwitchToMode "normal"; }
     }
@@ -200,9 +209,15 @@ keybinds clear-defaults=true {
         bind "PageDown" { PageScrollDown; }
         bind "left" { PageScrollUp; }
         bind "right" { PageScrollDown; }
-        // bind "Ctrl u" { PageScrollUp; }
-        // bind "Ctrl d" { PageScrollDown; }
+        bind "Ctrl u" { PageScrollUp; }
+        bind "Ctrl d" { PageScrollDown; }
         // bind "Ctrl c" { ScrollToBottom; SwitchToMode "normal"; }
+    }
+    shared_among "renametab" "renamepane" {
+        bind "esc" { SwitchToMode "normal"; }
+    }
+    shared_among "session" "tmux" {
+        bind "Alt d" { Detach; }
     }
     entersearch {
         bind "Alt s" { SwitchToMode "scroll"; }
@@ -212,35 +227,29 @@ keybinds clear-defaults=true {
     renametab {
         bind "esc" { UndoRenameTab; SwitchToMode "tab"; }
     }
-    shared_among "renametab" "renamepane" {
-        // bind "Ctrl c" { SwitchToMode "normal"; }
-        bind "esc" { SwitchToMode "normal"; }
-    }
     renamepane {
         bind "esc" { UndoRenamePane; SwitchToMode "pane"; }
     }
-    shared_among "session" "tmux" {
-        bind "d" { Detach; }
-    }
     tmux {
-        bind "left" { MoveFocus "left"; SwitchToMode "normal"; }
-        bind "down" { MoveFocus "down"; SwitchToMode "normal"; }
-        bind "up" { MoveFocus "up"; SwitchToMode "normal"; }
-        bind "right" { MoveFocus "right"; SwitchToMode "normal"; }
-        bind "space" { NextSwapLayout; }
-        bind "\"" { NewPane "down"; SwitchToMode "normal"; }
-        bind "%" { NewPane "right"; SwitchToMode "normal"; }
-        bind "," { SwitchToMode "renametab"; }
-        bind "[" { SwitchToMode "scroll"; }
-        bind "Ctrl b" { Write 2; SwitchToMode "normal"; }
-        bind "c" { NewTab; SwitchToMode "normal"; }
+        // bind "space" { NextSwapLayout; }
+        bind "\\" { NewPane "right"; SwitchToMode "normal"; }
+        bind "-" { NewPane "down"; SwitchToMode "normal"; }
+        bind "t" { NewTab; SwitchToMode "normal"; }
+        bind "r" { SwitchToMode "renametab"; }
+        bind "s" { SwitchToMode "scroll"; }
+        bind "Alt b" { Write 2; SwitchToMode "normal"; }
         bind "h" { MoveFocus "left"; SwitchToMode "normal"; }
         bind "j" { MoveFocus "down"; SwitchToMode "normal"; }
         bind "k" { MoveFocus "up"; SwitchToMode "normal"; }
         bind "l" { MoveFocus "right"; SwitchToMode "normal"; }
+        bind "left" { MoveFocus "left"; SwitchToMode "normal"; }
+        bind "down" { MoveFocus "down"; SwitchToMode "normal"; }
+        bind "up" { MoveFocus "up"; SwitchToMode "normal"; }
+        bind "right" { MoveFocus "right"; SwitchToMode "normal"; }
         bind "n" { GoToNextTab; SwitchToMode "normal"; }
-        bind "o" { FocusNextPane; }
         bind "p" { GoToPreviousTab; SwitchToMode "normal"; }
+        bind "o" { FocusNextPane; }
+        bind "i" { FocusPreviousPane; }
         bind "z" { ToggleFocusFullscreen; SwitchToMode "normal"; }
     }
 }
@@ -284,7 +293,8 @@ web_client {
 // Default: default
 // 
 // theme "dracula"
-theme "tokyo-night"
+// theme "tokyo-night"
+theme "catppuccin-mocha"
  
 // Choose the base input mode of zellij.
 // Default: normal

@@ -38,6 +38,7 @@ alias vi="nvim"
 # alias ccc=claude
 alias ccc="$HOME/.config/zsh/ai_conf/model-selector.sh"
 alias oc="opencode"
+alias switch-opencode-config="$HOME/.config/opencode/switch-opencode-config.sh"
 
 # VI Mode!!!
 # bindkey jj vi-cmd-mode
