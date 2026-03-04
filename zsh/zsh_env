@@ -5,6 +5,7 @@ export LANG="en_US.UTF-8"
 export EDITOR="nvim"
 if [[ "$TERM" == "xterm-kitty" ]]; then
   export TERMINFO_DIRS="$HOME/.config/kitty/terminfo:/usr/share/terminfo"
+  export KITTY_LISTEN_ON="unix:/tmp/mykitty"
 else
   export TERMINFO="/usr/share/terminfo"
 fi

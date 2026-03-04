@@ -75,6 +75,11 @@ return {
         --   -- 如需自定义 tsserver,取消注释
         -- },
 
+        -- Markdown - 禁用 marksman，诊断由 none-ls 统一处理
+        marksman = {
+          enabled = false,
+        },
+
         -- CSS
         cssls = {
           settings = {

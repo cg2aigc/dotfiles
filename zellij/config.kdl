@@ -3,36 +3,28 @@ keybinds clear-defaults=true {
         bind "Alt g" { SwitchToMode "normal"; }
     }
     pane {
+        bind "Alt p" { SwitchToMode "normal"; }
         bind "h" { MoveFocus "left"; }
         bind "j" { MoveFocus "down"; }
         bind "k" { MoveFocus "up"; }
         bind "l" { MoveFocus "right"; }
-        bind "left" { MoveFocus "left"; }
         bind "down" { MoveFocus "down"; }
         bind "up" { MoveFocus "up"; }
-        bind "right" { MoveFocus "right"; }
-        bind "r" { SwitchToMode "renamepane"; PaneNameInput 0; }
-        bind "d" { NewPane "down"; SwitchToMode "normal"; }
+        bind "left" { MovePane "left"; }
+        bind "right" { MovePane "right"; }
         bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "normal"; }
         bind "f" { ToggleFocusFullscreen; SwitchToMode "normal"; }
         bind "i" { TogglePanePinned; SwitchToMode "normal"; }
-        bind "n" { NewPane; SwitchToMode "normal"; }
         bind "p" { SwitchFocus; }
-        bind "Alt p" { SwitchToMode "normal"; }
-        // bind "r" { NewPane "right"; SwitchToMode "normal"; }
-        bind "s" { NewPane "stacked"; SwitchToMode "normal"; }
         bind "w" { ToggleFloatingPanes; SwitchToMode "normal"; }
         bind "z" { TogglePaneFrames; SwitchToMode "normal"; }
+        bind "n" { NewPane; SwitchToMode "normal"; }
+        bind "d" { NewPane "down"; SwitchToMode "normal"; }
+        bind "s" { NewPane "stacked"; SwitchToMode "normal"; }
+        bind "r" { SwitchToMode "renamepane"; PaneNameInput 0; }
     }
     tab {
-        bind "h" { GoToPreviousTab; }
-        bind "j" { GoToNextTab; }
-        bind "k" { GoToPreviousTab; }
-        bind "l" { GoToNextTab; }
-        bind "left" { GoToPreviousTab; }
-        bind "down" { GoToNextTab; }
-        bind "up" { GoToPreviousTab; }
-        bind "right" { GoToNextTab; }
+        bind "Alt t" { SwitchToMode "normal"; }
         bind "1" { GoToTab 1; }
         bind "2" { GoToTab 2; }
         bind "3" { GoToTab 3; }
@@ -42,17 +34,26 @@ keybinds clear-defaults=true {
         bind "7" { GoToTab 7; }
         bind "8" { GoToTab 8; }
         bind "9" { GoToTab 9; }
+        bind "h" { GoToPreviousTab; }
+        bind "j" { GoToNextTab; }
+        bind "k" { GoToPreviousTab; }
+        bind "l" { GoToNextTab; }
+        bind "down" { GoToNextTab; }
+        bind "up" { GoToPreviousTab; }
+        bind "left" { MoveTab "Left"; }
+        bind "right" { MoveTab "Right"; }
+        // bind "H" { move_to_focused_tab }
         bind "[" { BreakPaneLeft; SwitchToMode "normal"; }
         bind "]" { BreakPaneRight; SwitchToMode "normal"; }
         bind "b" { BreakPane; SwitchToMode "normal"; }
+        bind "s" { ToggleActiveSyncTab; SwitchToMode "normal"; }
+        bind "tab" { ToggleTab; }
         bind "n" { NewTab; SwitchToMode "normal"; }
         bind "r" { SwitchToMode "renametab"; TabNameInput 0; }
-        bind "s" { ToggleActiveSyncTab; SwitchToMode "normal"; }
-        bind "Alt t" { SwitchToMode "normal"; }
         bind "x" { CloseTab; SwitchToMode "normal"; }
-        bind "tab" { ToggleTab; }
     }
     resize {
+        bind "Alt r" { SwitchToMode "normal"; }
         bind "-" { Resize "Decrease"; }
         bind "=" { Resize "Increase"; }
         bind "H" { Resize "Decrease left"; }
@@ -67,9 +68,9 @@ keybinds clear-defaults=true {
         bind "down" { Resize "Increase down"; }
         bind "up" { Resize "Increase up"; }
         bind "right" { Resize "Increase right"; }
-        bind "Alt r" { SwitchToMode "normal"; }
     }
     move {
+        bind "Alt m" { SwitchToMode "normal"; }
         bind "h" { MovePane "left"; }
         bind "j" { MovePane "down"; }
         bind "k" { MovePane "up"; }
@@ -78,7 +79,6 @@ keybinds clear-defaults=true {
         bind "down" { MovePane "down"; }
         bind "up" { MovePane "up"; }
         bind "right" { MovePane "right"; }
-        bind "Alt m" { SwitchToMode "normal"; }
         bind "n" { MovePane; }
         bind "p" { MovePaneBackwards; }
         bind "tab" { MovePane; }
@@ -123,7 +123,6 @@ keybinds clear-defaults=true {
             }
             SwitchToMode "normal"
         }
-        bind "Alt O" { SwitchToMode "normal"; }
         bind "a" {
             LaunchOrFocusPlugin "zellij:about" {
                 floating true
@@ -131,6 +130,7 @@ keybinds clear-defaults=true {
             }
             SwitchToMode "normal"
         }
+        bind "Alt O" { SwitchToMode "normal"; }
     }
 
     // shared_except - 排除模式
@@ -138,23 +138,23 @@ keybinds clear-defaults=true {
     // 语法: shared_except "模式1" "模式2" "模式3"
     // 逻辑: (所有模式) - (排除的模式) = 生效的模式
     shared_except "locked" {
+        bind "Alt g" { SwitchToMode "locked"; }
         bind "Alt h" { MoveFocusOrTab "left"; }
         bind "Alt j" { MoveFocus "down"; }
         bind "Alt k" { MoveFocus "up"; }
         bind "Alt l" { MoveFocusOrTab "right"; }
+        bind "Alt down" { MoveFocus "down"; }
+        bind "Alt up" { MoveFocus "up"; }
+        bind "Alt left" { MoveTab "left"; }
+        bind "Alt right" { MoveTab "right"; }
         bind "Alt n" { NewPane; }
         bind "Alt i" { MoveTab "left"; }
         bind "Alt o" { MoveTab "right"; }
-        bind "Alt left" { MoveFocusOrTab "left"; }
-        bind "Alt down" { MoveFocus "down"; }
-        bind "Alt up" { MoveFocus "up"; }
-        bind "Alt right" { MoveFocusOrTab "right"; }
         bind "Alt -" { Resize "Decrease"; }
         bind "Alt =" { Resize "Increase"; }
         bind "Alt [" { PreviousSwapLayout; }
         bind "Alt ]" { NextSwapLayout; }
         bind "Alt f" { ToggleFloatingPanes; }
-        bind "Alt g" { SwitchToMode "locked"; }
         // 按键被占用，临时取消
         bind "Alt Ctrl p" { TogglePaneInGroup; }
         bind "Alt Shift p" { ToggleGroupMarking; }
@@ -166,9 +166,9 @@ keybinds clear-defaults=true {
     shared_except "locked" "session" {
         bind "Alt O" { SwitchToMode "session"; }
     }
-    shared_except "locked" "scroll" "search" "tmux" {
-        bind "Alt b" { SwitchToMode "tmux"; }
-    }
+    // shared_except "locked" "scroll" "search" "tmux" {
+    //     bind "Alt b" { SwitchToMode "tmux"; }
+    // }
     shared_except "locked" "scroll" "search" {
         bind "Alt s" { SwitchToMode "scroll"; }
     }
@@ -181,10 +181,10 @@ keybinds clear-defaults=true {
     shared_except "locked" "resize" {
         bind "Alt r" { SwitchToMode "resize"; }
     }
-    shared_except "normal" "locked" "entersearch" {
+    shared_except "locked" "normal" "entersearch" {
         bind "enter" { SwitchToMode "normal"; }
     }
-    shared_except "normal" "locked" "entersearch" "renametab" "renamepane" {
+    shared_except "locked" "normal" "entersearch" "renametab" "renamepane" {
         bind "esc" { SwitchToMode "normal"; }
     }
 
@@ -196,21 +196,21 @@ keybinds clear-defaults=true {
         bind "x" { CloseFocus; SwitchToMode "normal"; }
     }
     shared_among "scroll" "search" {
-        bind "h" { PageScrollUp; }
+        bind "Alt s" { SwitchToMode "normal"; }
         bind "j" { ScrollDown; }
         bind "k" { ScrollUp; }
+        bind "h" { PageScrollUp; }
         bind "l" { PageScrollDown; }
         bind "d" { HalfPageScrollDown; }
         bind "u" { HalfPageScrollUp; }
-        bind "Alt s" { SwitchToMode "normal"; }
         bind "up" { ScrollUp; }
         bind "down" { ScrollDown; }
-        bind "PageUp" { PageScrollUp; }
-        bind "PageDown" { PageScrollDown; }
         bind "left" { PageScrollUp; }
         bind "right" { PageScrollDown; }
-        bind "Ctrl u" { PageScrollUp; }
-        bind "Ctrl d" { PageScrollDown; }
+        bind "PageUp" { PageScrollUp; }
+        bind "PageDown" { PageScrollDown; }
+        // bind "Ctrl u" { PageScrollUp; }
+        // bind "Ctrl d" { PageScrollDown; }
         // bind "Ctrl c" { ScrollToBottom; SwitchToMode "normal"; }
     }
     shared_among "renametab" "renamepane" {
@@ -231,13 +231,13 @@ keybinds clear-defaults=true {
         bind "esc" { UndoRenamePane; SwitchToMode "pane"; }
     }
     tmux {
-        // bind "space" { NextSwapLayout; }
+        // disabled tmux model
+        // bind "Alt b" { Write 2; SwitchToMode "normal"; }
         bind "\\" { NewPane "right"; SwitchToMode "normal"; }
         bind "-" { NewPane "down"; SwitchToMode "normal"; }
         bind "t" { NewTab; SwitchToMode "normal"; }
         bind "r" { SwitchToMode "renametab"; }
         bind "s" { SwitchToMode "scroll"; }
-        bind "Alt b" { Write 2; SwitchToMode "normal"; }
         bind "h" { MoveFocus "left"; SwitchToMode "normal"; }
         bind "j" { MoveFocus "down"; SwitchToMode "normal"; }
         bind "k" { MoveFocus "up"; SwitchToMode "normal"; }
@@ -251,6 +251,7 @@ keybinds clear-defaults=true {
         bind "o" { FocusNextPane; }
         bind "i" { FocusPreviousPane; }
         bind "z" { ToggleFocusFullscreen; SwitchToMode "normal"; }
+        // bind "space" { NextSwapLayout; }
     }
 }
 
@@ -347,7 +348,7 @@ pane_frames false
 // (Requires restart)
 // Default: false
 // 
-// mirror_session true
+mirror_session true
  
 // Choose what to do when zellij receives SIGTERM, SIGINT, SIGQUIT or SIGHUP
 // eg. when terminal window with an active zellij session is closed
