@@ -34,10 +34,17 @@ augroup("FormatOnSave", { clear = true })
 
 autocmd("BufWritePre", {
   group = "FormatOnSave",
-  pattern = { "*.ts", "*.tsx", "*.js", "*.jsx", "*.vue", "*.css", "*.scss", "*.json" },
+  pattern = { "*.ts", "*.tsx", "*.js", "*.jsx", "*.vue", "*.css", "*.scss", "*.json", "*.lua" },
   callback = function()
     if vim.g.autoformat then
-      vim.lsp.buf.format({ async = false })
+      -- vim.lsp.buf.format({ async = false })
+
+      require("conform").format({ 
+        bufnr = 0, 
+        lsp_format = "fallback",
+        async = false,
+        timeout_ms = 2000,
+      })
     end
   end,
 })
