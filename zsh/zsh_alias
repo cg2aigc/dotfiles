@@ -40,6 +40,10 @@ alias ccc="$HOME/.config/zsh/ai_conf/model-selector.sh"
 alias oc="opencode"
 alias switch-opencode-config="$HOME/.config/opencode/switch-opencode-config.sh"
 
+# Claude Code 默认提供商切换
+alias switch-provider="$HOME/.config/zsh/ai_conf/switch-provider.sh"
+alias claude="CLAUDE_WRAPPER_MODE=1 $HOME/.config/zsh/ai_conf/switch-provider.sh"
+
 # VI Mode!!!
 # bindkey jj vi-cmd-mode
 

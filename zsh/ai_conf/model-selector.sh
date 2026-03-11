@@ -31,28 +31,29 @@ selected=$(echo "$models" | fzf \
     --preview='echo {}' \
     --preview-window=down:3:wrap \
     --delimiter="|" \
-    --with-nth=1,5)
+    --with-nth=1)
 
-# 如果取消选择，使用默认 Claude Official
+# 如果取消选择，使用默认 Claude
 if [[ -z "$selected" ]]; then
-    echo "未选择模型，使用默认 Claude Official"
-    selected=$(echo "$models" | grep "Claude Official")
+    echo "未选择模型，使用默认 Claude"
+    selected=$(echo "$models" | grep "Claude")
 fi
 
-# 解析选择的模型配置
-IFS='|' read -r model_name base_url api_key_var model_id description <<< "$selected"
+# 解析选择的模型配置（6字段格式）
+IFS='|' read -r model_name base_url api_key_var opus_model sonnet_model haiku_model <<< "$selected"
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "✨ 已选择模型：$model_name"
 echo "🔗 API Base URL: $base_url"
 echo "🔑 API Key 变量: ${!api_key_var}"
-echo "🤖 模型 ID: $model_id"
-echo "📝 描述：$description"
+echo "🧠 推理模型 (Opus): $opus_model"
+echo "⚡ 常规模型 (Sonnet): $sonnet_model"
+echo "🚀 快速模型 (Haiku): $haiku_model"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo
 
 # 检查 API Key 是否设置
-if [[ -z "${!api_key_var}" && $model_name != 'Claude Official' ]]; then
+if [[ -z "${!api_key_var}" && $model_name != 'Claude' ]]; then
     echo "⚠️  警告：环境变量 $api_key_var 未设置"
     echo "请在 ~/.zshrc 中添加："
     echo "  export $api_key_var='${!api_key_var}'"
@@ -69,7 +70,7 @@ CLAUDE_TMP_DIR="$HOME/tmp/claude-code"
 mkdir -p "$CLAUDE_TMP_DIR"
 
 # 2. 针对非默认模型，注入API相关环境变量
-if [[ $model_name != 'Claude Official' ]]; then
+if [[ $model_name != 'Claude' ]]; then
     # 基础环境变量（解决.sock监控问题）
     export TMPDIR="$CLAUDE_TMP_DIR"
     export CLAUDE_CODE_DISABLE_FILE_WATCHERS=1
@@ -78,11 +79,11 @@ if [[ $model_name != 'Claude Official' ]]; then
     # claude 相关环境变量
     export ANTHROPIC_BASE_URL="$base_url"
     export ANTHROPIC_AUTH_TOKEN="${!api_key_var}"
-    export ANTHROPIC_MODEL="$model_id"
-    export ANTHROPIC_SMALL_FAST_MODEL="$model_id"
-    export ANTHROPIC_DEFAULT_SONNET_MODEL="$model_id"
-    export ANTHROPIC_DEFAULT_OPUS_MODEL="$model_id"
-    export ANTHROPIC_DEFAULT_HAIKU_MODEL="$model_id"
+    export ANTHROPIC_MODEL="$sonnet_model"
+    export ANTHROPIC_SMALL_FAST_MODEL="$haiku_model"
+    export ANTHROPIC_DEFAULT_SONNET_MODEL="$sonnet_model"
+    export ANTHROPIC_DEFAULT_OPUS_MODEL="$opus_model"
+    export ANTHROPIC_DEFAULT_HAIKU_MODEL="$haiku_model"
 fi
 
 # ====================== 统一启动逻辑 ======================
@@ -99,7 +100,7 @@ unset ANTHROPIC_DEFAULT_OPUS_MODEL ANTHROPIC_DEFAULT_HAIKU_MODEL
 unset TMPDIR CLAUDE_CODE_DISABLE_FILE_WATCHERS CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC
 
 
-# if [[ $model_name == 'Claude Official' ]]; then
+# if [[ $model_name == 'Claude' ]]; then
 #   # 使用默认订阅，直接启动
 #   echo "🚀 启动 Claude Code（使用默认订阅）..."
 #   echo
